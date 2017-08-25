@@ -70,7 +70,7 @@ else:
 # Get the pylpfile location
 pylpfile = args.pylpfile
 if not pylpfile:
-	pylpfile = os.path.join(cwd, "pylpfile.py")
+	pylpfile = os.path.join(config.cwd, "pylpfile.py")
 elif not args.cwd:
 	config.cwd = os.path.dirname(pylpfile)
 

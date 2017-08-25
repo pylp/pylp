@@ -15,18 +15,20 @@ from .transformer import Transformer
 
 
 # Return a transformer for writing files
-def dest(path):
-	return FileWriter(path)
+def dest(path, **options):
+	return FileWriter(path, **options)
 
 
 
 # Get the writing path of a file
-def get_path(dest, file):
+def get_path(dest, file, cwd = None):
 	if callable(dest):
 		return dest(file)
 
+	if not cwd:
+		cwd = file.cwd
 	if not os.path.isabs(dest):
-		dest = os.path.join(file.cwd, dest)
+		dest = os.path.join(cwd, dest)
 
 	if file.base:
 		relative = os.path.relpath(file.path, file.base)
@@ -48,10 +50,11 @@ def write_file(path, contents):
 class FileWriter(Transformer):
 
 	# Constructor
-	def __init__(self, path):
+	def __init__(self, path, **options):
 		super().__init__()
 
 		self.dest = path
+		self.cwd = options.get('cwd')
 
 		self.exe = ThreadPoolExecutor()
 		self.loop = asyncio.get_event_loop()

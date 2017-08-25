@@ -15,7 +15,7 @@ Check out the [documentation](/docs/README.md) for a Getting started guide, API 
 making a plugin.
 
 
-## Sample `pylpfile.js`
+## Sample `pylpfile.py`
 
 This file is an example of what you can do with Pylp.
 

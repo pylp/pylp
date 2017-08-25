@@ -1,9 +1,9 @@
 # Getting Started
 
 
-#### Check for Node and npm
+#### Check for Python 3
 
-Make sure that you've installed Python **3.5** or higher to install gulp.
+Make sure that you've installed Python **3.5** or higher to install Pylp.
 
 ```sh
 python3 --version
@@ -60,3 +60,4 @@ Voila! This default task will run and copy your `pympfile` in the `copy` folder.
 ## Where do I go now?
 
 - [API Documentation](API.md) - The programming interface
+- [CLI documentation](CLI.md) - Learn how to call tasks
