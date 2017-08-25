@@ -1,6 +1,6 @@
 ## Pylp API docs
 
-Jump to:
+Jump to
   [pylp.src](#pylpsrcglobs-options) |
   [pylp.dest](#pylpdestpath-options) |
   [pylp.task](#pylptaskname--deps--fn) |
@@ -10,8 +10,8 @@ Jump to:
 
 ### pylp.src(globs, **options)
 
-Create a new stream and add some files found from glob or a list of globs.  
-The function returns the stream that can be piped to plugins.
+Create a new stream and add some files found from a glob or a list of globs.  
+The function returns this `pylp.Stream` that can be piped to plugins.
 
 ```python
 pylp.src('templates/*.jade')
@@ -21,7 +21,7 @@ pylp.src('templates/*.jade')
 
 
 #### globs
-Type: `str` or `list`
+Type: `str` or `list` of `str`
 
 Glob or list of globs to read.
 
@@ -39,7 +39,6 @@ The following expression matches `a.js` and `bad.js`:
 
 
 #### options
-Type: `dict`
 
 ##### options.read
 Type: `bool`  
@@ -82,14 +81,12 @@ See `pylp.src` above for more info.
 #### path
 Type: `str` or `callable`
 
-The path (output folder) to write files to. Or a function that returns it, the function will be provided a `File`.
-
+The path (output folder) to write files to. Or a function that returns it, the function will be provided a `pylp.File`.
 
 #### options
-Type: `dict`
 
 ##### options.cwd
-Type: `str`
+Type: `str`  
 Default: `os.getcwd()`
 
 `cwd` for the output folder, only has an effect if provided output folder is relative.
@@ -137,7 +134,7 @@ pylp.task('build', ['list', 'of', 'task', 'names'])
 #### fn
 Type: `callable`
 
-The function performs the task's main operations. This function **must** return a `Stream`.  
+The function performs the task's main operations. This function **must** return a `pylp.Stream`.  
 Generally it's a lambda that takes the form of:
 
 ```python
@@ -163,14 +160,14 @@ def build_stuff:
 
 
 
-### pylp.task(stream, *plugins)
+### pylp.pipes(stream, *plugins)
 
 Pipes plugins end-to-end, starting with a stream.
 
 The following tasks give the same result.
 
 ```python
-pylp.task('buildStuff', pylp.pipes(
+pylp.task('buildStuff', lambda: pylp.pipes(
     pylp.src('<some source path>'),
     plugin1(),
     plugin2(),
@@ -195,6 +192,6 @@ The stream where the piping will start.
 
 
 #### plugins
-Type: list of `pylp.Transformer`
+Type: `list` of `pylp.Transformer`
 
 The list of plugins to pipe.

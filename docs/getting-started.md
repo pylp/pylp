@@ -8,7 +8,7 @@ Make sure that you've installed Python **3.5** or higher to install Pylp.
 ```sh
 python3 --version
 ```
-In some cases Python3 is just named `python` so you have to run:
+In some cases Python 3 is just named `python` so you have to run:
 ```sh
 python --version
 ```
@@ -28,7 +28,7 @@ Create a file named `pylpfile.py` in your project root with these contents:
 ```python
 import pylp
 
-gulp.task('default', function() {
+pylp.task('default', function() {
     pylp.src("pylpfile.py")
       .pipe(pylp.dest("copy"))
 )

@@ -4,9 +4,9 @@
 
 Pylp has very few flags to know about.
 
-- `-v` or `--version` will display Pylp versions
-- `--pylpfile <pylpfile path>` will manually set path of pylpfile. Useful if you have multiple pylpfiles. This will set the CWD to the pylpfile directory as well
-- `--cwd <dir path>` will manually set the CWD. The search for the pylpfile will be from here
+- `-v` or `--version` will display Pylp versions.
+- `--pylpfile <pylpfile path>` will manually set path of pylpfile. Useful if you have multiple pylpfiles. This will set the CWD to the pylpfile directory as well.
+- `--cwd <dir path>` will manually set the CWD. The search for the pylpfile will be from here.
 
 
 ### Tasks
