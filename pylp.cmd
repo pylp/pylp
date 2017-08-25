@@ -1,7 +1,7 @@
 ::
-:: Start Pylp via the terminal.
+:: Start Pylp CLI.
 ::
-:: Copyright (C) 2017, Guillaume Gonnet
+:: Copyright (C) 2017 The Pylp Authors.
 :: This file is under the MIT License.
 @echo off
 setlocal
