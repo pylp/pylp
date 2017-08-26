@@ -9,10 +9,10 @@ License GPL3
 
 import asyncio
 import time
-import pylp.cli.logger as logger
-from .transformer import Transformer
-from .utils import time_to_text
 import pylp
+import pylp.cli.logger as logger
+from pylp.lib.transformer import Transformer
+from pylp.lib.utils import time_to_text
 
 
 

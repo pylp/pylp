@@ -10,7 +10,7 @@ This file is under the MIT License.
 import runpy, os, sys
 import traceback
 import asyncio
-import pylp, logger
+import pylp, pylp.cli.logger as logger
 
 
 # Run a pylpfile

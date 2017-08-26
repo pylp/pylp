@@ -10,7 +10,7 @@ This file is under the MIT License.
 import os
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-from .transformer import Transformer
+from pylp.lib.transformer import Transformer
 
 
 # The file class

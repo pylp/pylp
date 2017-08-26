@@ -8,7 +8,7 @@ This file is under the MIT License.
 """
 
 import sys
-from .tasks import task as __task
+from pylp.lib.tasks import task as __task
 
 
 # Export this module as 'pylp.fn'

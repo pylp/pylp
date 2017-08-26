@@ -7,27 +7,24 @@ This file is under the MIT License.
 
 """
 
-import os
-from setuptools import setup
-from . import __version__ as version
+from setuptools import setup, find_packages
+from pylp import __version__ as version
 
 
-# Read a file
-def read(fname):
-	return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
-
-# Setup Pylp
 setup(
 	name = "pylp",
 	version = version,
 	author = "Guillaume Gonnet",
-	description = ("A Python task runner inspired by gulp.js"),
+	author_email = "gonnet.guillaume97@gmail.com",
+	description = "A Python task runner inspired by gulp.js",
 	license = "MIT",
 	keywords = "pylp build task runner gulp",
 	url = "https://github.com/pylp/pylp",
-	packages=['pylp'],
-	long_description = read('README.md'),
+	packages = find_packages(),
+	long_description = open("README.rst").read(),
+	entry_points = {
+		"console_scripts" : ["pylp = pylp.cli.cli:launch_cli",]
+	},
 	classifiers = [
 		"Development Status :: 3 - Alpha",
 		"Topic :: Utilities",		

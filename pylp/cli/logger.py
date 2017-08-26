@@ -8,7 +8,7 @@ This file is under the MIT License.
 """
 
 import time
-import colors
+import pylp.cli.colors as colors
 
 
 # Print a message with a color

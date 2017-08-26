@@ -9,9 +9,9 @@ This file is under the MIT License.
 
 import glob
 import os
-from . import config
-from .file import File, FileReader
-from .stream import Stream
+import pylp.lib.config as config
+from pylp.lib.file import File, FileReader
+from pylp.lib.stream import Stream
 
 
 # Parse a glob

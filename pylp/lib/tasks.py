@@ -8,7 +8,7 @@ License GPL3
 """
 
 import pylp.cli.logger as logger
-from .runner import TaskRunner
+from pylp.lib.runner import TaskRunner
 
 
 

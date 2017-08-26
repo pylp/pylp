@@ -7,7 +7,7 @@ This file is under the MIT License.
 
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.3"
 
 from pylp.lib.tasks import task
 from pylp.lib.tasks import start

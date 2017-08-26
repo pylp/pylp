@@ -10,7 +10,7 @@ License GPL3
 import os
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-from .transformer import Transformer
+from pylp.lib.transformer import Transformer
 
 
 
