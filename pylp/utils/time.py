@@ -1,6 +1,6 @@
 """
 
-Some useful functions.
+Some useful functions for manipulating time.
 
 Copyright (C) 2017 The Pylp Authors.
 This file is under the MIT License.
@@ -8,16 +8,13 @@ This file is under the MIT License.
 """
 
 
-# Pipe several transformers end to end
-def pipes(stream, *transformers):
-    for transformer in transformers:
-        stream = stream.pipe(transformer)
-    return stream
-
-
 # Get a representative text of a time (in s)
 def time_to_text(time):
-    if time < 1:
+    if time < 0.001:
+        return str(round(time * 1000000)) + " µs"
+    elif time < 1:
         return str(round(time * 1000)) + " ms"
-    else:
+    elif time < 60:
         return str(round(time, 1)) + " s"
+    else:
+        return str(round(time / 60, 1)) + " min"
