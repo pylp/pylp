@@ -24,13 +24,13 @@ def _make_color_fn(color):
 			_color_sep + "default" + _color_sep2)
 	return _color
 
-# Create a function defined colors
+# Create a function for each defined color
 for _color in colors.foreground_colors.keys():
 	globals()[_color] = _make_color_fn(_color)
 
 
 
-# Log a text without add the current time
+# Log a text without adding the current time
 def just_log(*texts, sep = ""):
 	text = sep.join(texts)
 	array = text.split(_color_sep)
