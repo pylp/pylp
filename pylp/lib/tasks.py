@@ -22,8 +22,7 @@ def task(name, deps = None, fn = None):
 		deps = None
 
 	if not deps and not fn:
-		logger.error("The task '%s' is empty" % name)
-		logger.reset()
+		logger.log(logger.red("The task '%s' is empty" % name))
 	else:
 		tasks[name] = [fn, deps]
 
@@ -35,8 +34,7 @@ running = []
 # Start a task
 def start(name, called = None):
 	if name not in tasks:
-		logger.error("Task '%s' not in your pylpfile" % name)
-		logger.reset()
+		logger.log(logger.red("Task '%s' not in your pylpfile" % name))
 	else:
 		task = tasks[name]
 		runner = TaskRunner(name, task[0], task[1], called)

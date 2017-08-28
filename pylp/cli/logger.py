@@ -11,56 +11,53 @@ import time
 import pylp.cli.colors as colors
 
 
-# Print a message with a color
-def cprint(text):
-	print(text, end='', flush=colors.is_win32)
+# Color separators
+# They can be used as follow: "~~color:text"
+_color_sep = "~~"
+_color_sep2 = ":"
 
 
-# Do we have reset the line?
-have_reset = True
+# Create a function that set the foreground color
+def _make_color_fn(color):
+	def _color(text = ""):
+		return (_color_sep + color + _color_sep2 + text +
+			_color_sep + "default" + _color_sep2)
+	return _color
 
-# Reset the color and add a new line
-def reset(newLine = True):
-	global have_reset
+# Create a function defined colors
+for _color in colors.foreground_colors.keys():
+	globals()[_color] = _make_color_fn(_color)
+
+
+
+# Log a text without add the current time
+def just_log(*texts, sep = ""):
+	text = sep.join(texts)
+	array = text.split(_color_sep)
+
+	for part in array:
+		parts = part.split(_color_sep2, 1)
+		if len(parts) == 2 and parts[1]:
+			colors.foreground(parts[0])
+			print(parts[1], end='', flush=colors.is_win32)
+
 	colors.foreground("default")
-	have_reset = True
-	if newLine:
-		print()
+	print()
 
 
-# Log the current time (used as prefix in all logs)
-def log_time():
-	global have_reset
-	if have_reset:
-		colors.foreground("default")
-		cprint("[")
-		colors.foreground("dark-gray")
-		cprint(time.strftime("%H:%M:%S"))
-		colors.foreground("default")
-		cprint("] ")
-		have_reset = False
+
+# Get the current time (used as prefix in all logs)
+def get_time():
+	return (default("["),
+		darkgray(time.strftime("%H:%M:%S")),
+		default("] "))
 
 
-# Log a normal text
-def log(text):
-	log_time()
-	colors.foreground("default")
-	cprint(text)
+# Log a text
+def log(*texts, sep = ""):
+	text = sep.join(texts)
 
-# Log an information
-def info(text):
-	log_time()
-	colors.foreground("magenta")
-	cprint(text)
-
-# Log an name
-def name(text, newLine = False):
-	log_time()
-	colors.foreground("cyan")
-	cprint(text)
-
-# Log an error
-def error(text, newLine = False):
-	log_time()
-	colors.foreground("red")
-	cprint(text)
+	if text.startswith("\n"):
+		just_log("\n", *get_time(), text[1:])
+	else:
+		just_log(*get_time(), text)

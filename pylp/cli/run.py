@@ -16,18 +16,11 @@ import pylp, pylp.cli.logger as logger
 # Run a pylpfile
 def run(path, tasks):
 	# Test if the pylpfile exists
-	is_file = os.path.isfile(path)
-
 	if not os.path.isfile(path):
-		logger.error("Can't read pylpfile ")
+		logger.log(logger.red("Can't read pylpfile "), logger.magenta(path))
+		sys.exit(-1)
 	else:
-		logger.log("Using pylpfile ")
-
-	logger.info(path)
-	logger.reset()
-
-	if not is_file:
-		return
+		logger.log("Using pylpfile ", logger.magenta(path))
 
 
 	# Run the pylpfile
@@ -35,10 +28,8 @@ def run(path, tasks):
 		runpy.run_path(path, None, "pylpfile")
 	except Exception as e:
 		traceback.print_exc(file=sys.stdout)
-		logger.reset()
-		logger.error("An error has occurred during the execution of the pylpfile")
-		logger.reset()
-		return
+		logger.log(logger.red("\nAn error has occurred during the execution of the pylpfile"))
+		sys.exit(-1)
 
 
 	# Start the tasks

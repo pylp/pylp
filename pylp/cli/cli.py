@@ -80,7 +80,7 @@ def launch_cli():
 	if args.pylpfile:
 		pylpfile = args.pylpfile[0]
 
-	if not pylpfile:
+	if not args.pylpfile:
 		pylpfile = path.join(config.cwd, "pylpfile.py")
 	elif not args.cwd:
 		config.cwd = path.dirname(pylpfile)

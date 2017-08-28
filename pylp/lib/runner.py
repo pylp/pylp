@@ -51,22 +51,14 @@ class TaskRunner():
 	# Log that the task has started
 	def log_starting(self):
 		self.start_time = time.perf_counter()
-
-		logger.log("Starting '")
-		logger.name(self.name)
-		logger.log("'...")
-		logger.reset()
+		logger.log("Starting '", logger.cyan(self.name), "'...")
 
 
 	# Log that this task is done
 	def log_finished(self):
 		delta = time.perf_counter() - self.start_time
-
-		logger.log("Finished '")
-		logger.name(self.name)
-		logger.log("' after ")
-		logger.info(time_to_text(delta))
-		logger.reset()
+		logger.log("Finished '", logger.cyan(self.name),
+			"' after ", logger.magenta(time_to_text(delta)))
 
 
 	# Call the function attached to the task
