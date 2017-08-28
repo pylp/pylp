@@ -16,7 +16,7 @@ python3 --version
 ```
 
 
-#### Install the `pylp` command
+#### Install Pylp
 
 ```sh
 pip install pylp
