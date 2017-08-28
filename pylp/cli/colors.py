@@ -43,7 +43,7 @@ foreground_colors = {
 	"white": [97, 15]
 }
 
-# Supported background colors, with [ansi, win32]
+# Supported background colors, ordered by [ansi, win32]
 background_colors = {
 	"default": [49, 0],
 	"black": [40, 0],
