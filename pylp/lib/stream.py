@@ -19,9 +19,10 @@ class Stream():
 		self.files = files if files else []
 		self.transformed = 0
 
-		# Transformer and next stream
+		# Transformer, next and previous streams
 		self.transformer = None
 		self.next = None
+		self.prev = None
 
 		# Is the stream ended?
 		self.ended = False
@@ -70,9 +71,11 @@ class Stream():
 
 		stream = Stream()
 		self.next = stream
+		stream.prev = self
 
 		self.transformer = transformer
 		transformer.stream = self
+		transformer.piped()
 
 		for file in self.files:
 			future = asyncio.ensure_future(self.transformer.transform(file))

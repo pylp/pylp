@@ -23,6 +23,10 @@ class Transformer():
 		self.stream.next.append_file(file)
 
 
+	# Function called when the transformer is piped to a stream
+	def piped():
+		pass
+
 	# Function called when a file need to be transformed
 	async def transform(self, file):
 		pass
