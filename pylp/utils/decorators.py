@@ -16,8 +16,14 @@ sys.modules['pylp.fn'] = sys.modules[__name__]
 
 
 # Create a task
-def task(name, deps = None):
+def task(obj = None, deps = None):
+	# The decorator is not used as a function
+	if callable(obj):
+		__task(obj.__name__, obj)
+		return obj
+
+	# The decorator is used as a function
 	def __decorated(func):
-		__task(name, deps, func)
+		__task(obj, deps, func)
 		return func
 	return __decorated
