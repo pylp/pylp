@@ -64,3 +64,4 @@ class FileWriter(Transformer):
 	async def transform(self, file):
 		path = get_path(self.dest, file)
 		await self.loop.run_in_executor(self.exe, write_file, path, file.contents)
+		return file
