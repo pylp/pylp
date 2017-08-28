@@ -54,8 +54,8 @@ Default: everything before a glob starts.
 E.g., consider `somefile.js` in `client/js/somedir`:
 
 ```python
-pylp.src('client/js/**/*.js') # Matches 'client/js/somedir/somefile.js'
-  .pipe(pylp.dest('build'))   # Writes 'build/somefile.js'
+pylp.src('client/js/**/*.js') # Matches 'client/js/somedir/somefile.js' (resolve 'base' to 'client/js/')
+  .pipe(pylp.dest('build'))   # Writes 'build/somedir/somefile.js'
 
 pylp.src('client/js/**/*.js', base='client')
   .pipe(pylp.dest('build'))   # Writes 'build/js/somedir/somefile.js'
@@ -65,11 +65,11 @@ pylp.src('client/js/**/*.js', base='client')
 
 ### pylp.dest(path, **options)
 
-Can be piped to and it will write files. Re-emits all data passed to it so you can pipe to multiple folders.  Folders that don't exist will be created.
+Can be piped to and it will write files. Re-emits all data passed to it so you can pipe to multiple folders. Folders that don't exist will be created.
 
 ```python
-pylp.src('templates/*.jade')
-  .pipe(jade())
+pylp.src('lib/*.py')
+  .pipe(concat())
   .pipe(pylp.dest('build'))
 ```
 
@@ -162,7 +162,7 @@ def build_stuff:
 
 ### pylp.pipes(stream, *plugins)
 
-Pipes plugins end-to-end, starting with a stream.
+Pipes plugins end-to-end, starting with a stream. The function returns the last piped stream.
 
 The following tasks give the same result.
 
