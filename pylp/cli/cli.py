@@ -56,6 +56,18 @@ def launch_cli():
 		metavar="<dir path>"
 	)
 
+	# Force Pylp to not display colors
+	parser.add_argument('--no-color',
+		action="store_false",
+		help="force Pylp to not display colors"
+	)
+
+	# Disable logging
+	parser.add_argument('--silent',
+		action="store_true",
+		help="disable all Pylp logging"
+	)
+
 	# List of tasks to execute
 	parser.add_argument('tasks',
 		nargs="*",
@@ -75,6 +87,7 @@ def launch_cli():
 	else:
 		config.cwd = os.getcwd()
 
+
 	# Get the pylpfile location
 	if args.pylpfile:
 		pylpfile = args.pylpfile[0]
@@ -83,6 +96,13 @@ def launch_cli():
 		pylpfile = path.join(config.cwd, "pylpfile.py")
 	elif not args.cwd:
 		config.cwd = path.dirname(pylpfile)
+
+
+	# Must the terminal have colors?
+	config.color = args.no_color
+
+	# Must Pylp be silent (no logging)?
+	config.silent = args.silent
 
 
 	# Execute the pylpfile

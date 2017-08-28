@@ -9,6 +9,7 @@ This file is under the MIT License.
 
 import time
 import pylp.cli.colors as colors
+import pylp.lib.config as config
 
 
 # Color separators
@@ -32,16 +33,25 @@ for _color in colors.foreground_colors.keys():
 
 # Log a text without adding the current time
 def just_log(*texts, sep = ""):
+	if config.silent:
+		return
+
 	text = sep.join(texts)
 	array = text.split(_color_sep)
 
 	for part in array:
 		parts = part.split(_color_sep2, 1)
-		if len(parts) == 2 and parts[1]:
+		if len(parts) != 2 or not parts[1]:
+			continue
+
+		if not config.color:
+			print(parts[1], end='')
+		else:
 			colors.foreground(parts[0])
 			print(parts[1], end='', flush=colors.is_win32)
 
-	colors.foreground("default")
+	if config.color:
+		colors.foreground("default")
 	print()
 
 
