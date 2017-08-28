@@ -8,9 +8,10 @@ License GPL3
 """
 
 import asyncio
-import time
+import inspect, time
 import pylp
 import pylp.cli.logger as logger
+from pylp.lib.stream import Stream
 from pylp.lib.transformer import Transformer
 from pylp.utils.time import time_to_text
 
@@ -48,6 +49,7 @@ class TaskRunner():
 			self.future = self.call_task_fn()
 
 
+
 	# Log that the task has started
 	def log_starting(self):
 		self.start_time = time.perf_counter()
@@ -61,15 +63,31 @@ class TaskRunner():
 			"' after ", logger.magenta(time_to_text(delta)))
 
 
+
 	# Call the function attached to the task
 	def call_task_fn(self):
 		if not self.fn:
-			self.log_finished()
+			return self.log_finished()
+
+		future = asyncio.Future()
+		future.add_done_callback(lambda x: self.log_finished())
+
+		if inspect.iscoroutinefunction(self.fn):
+			f = asyncio.ensure_future(self.fn())
+			f.add_done_callback(lambda x: self.bind_end(x.result(), future))
 		else:
-			future = asyncio.Future()
-			future.add_done_callback(lambda x: self.log_finished())
-			self.fn().pipe(TaskEndTransformer(future))
-			return future
+			self.bind_end(self.fn(), future)
+
+		return future
+
+
+	# Dind a 'TaskEndTransformer' to a stream
+	def bind_end(self, stream, future):
+		if not isinstance(stream, Stream):
+			future.set_result(None)
+		else:
+			stream.pipe(TaskEndTransformer(future))
+
 
 
 	# Start running dependencies
@@ -79,7 +97,7 @@ class TaskRunner():
 		self.called += deps
 
 		# Start only existing dependencies
-		runners = list(filter(lambda x: x, map(lambda dep: pylp.start(dep), deps)))
+		runners = list(filter(lambda x: x and x.future, map(lambda dep: pylp.start(dep), deps)))
 		if len(runners) != 0:
 			await asyncio.wait(map(lambda runner: runner.future, runners))
 
