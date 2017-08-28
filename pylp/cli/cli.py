@@ -7,19 +7,18 @@ This file is under the MIT License.
 
 """
 
-# Add 'pylp' into 'sys.path' if Pylp is not in python Lib. 
+# Add parent folder into 'sys.path' if Pylp is not in Python 'Lib' folder.
 import os, sys
 import os.path as path
 
 relpath = path.dirname(path.realpath(__file__))
-parent = path.normpath(path.realpath(path.join(relpath, "..")))
+parent = path.normpath(path.realpath(path.join(relpath, "../..")))
 
-if not parent.endswith(path.normpath("Lib/site-package")):
-	base = os.path.join(os.path.dirname(__file__), "../..")
-	sys.path.insert(0, os.path.abspath(base))
+if not parent.lower().endswith(path.normpath("lib/site-packages")):
+	sys.path.insert(0, os.path.abspath(parent))
 
 
-# We can now import all Pylp files
+# We can import now all Pylp files
 import argparse
 from pylp import __version__ as version
 import pylp.lib.config as config
@@ -91,6 +90,6 @@ def launch_cli():
 
 
 
-# Launch the CLI if this is executed directly
+# Launch the CLI if this file is executed directly
 if __name__ == "__main__":
     launch_cli()
