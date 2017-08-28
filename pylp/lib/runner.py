@@ -12,7 +12,7 @@ import time
 import pylp
 import pylp.cli.logger as logger
 from pylp.lib.transformer import Transformer
-from pylp.lib.utils import time_to_text
+from pylp.utils.time import time_to_text
 
 
 

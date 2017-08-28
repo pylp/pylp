@@ -7,31 +7,41 @@ This file is under the MIT License.
 
 """
 
-import glob
 import os
 import pylp.lib.config as config
+from pylp.utils.glob import separate_globs, parse_glob, find_base
 from pylp.lib.file import File, FileReader
 from pylp.lib.stream import Stream
 
 
-# Parse a glob
-def parse_glob(path, include, exclude):
-	files = glob.glob(path, recursive=True)
+# Find files to include
+def find_files(globs):
+	last_cwd = os.getcwd()
+	os.chdir(config.cwd)
 
-	is_neg = path.startswith("!")
-	array = exclude if is_neg else include
+	gex, gin = separate_globs(globs)
 
-	for file in files:
-		if file not in array:
-			array.append(file)
+	# Find excluded files
+	exclude = []
+	for glob in gex:
+		parse_glob(glob, exclude)
 
+	files = []
+	include = []
+	order = 0
 
+	# Find included files and removed excluded files
+	for glob in gin:
+		order += 1
+		array = parse_glob(glob, include)
+		base = find_base(glob)
 
-# Remove excluded file from 'include' array
-def apply_exclude(include, exclude):
-	for file in exclude:
-		if file in include:
-			include.remove(file)
+		for file in array:
+			if file not in exclude:
+				files.append((order, base, file))
+
+	os.chdir(last_cwd)
+	return files
 
 
 
@@ -41,23 +51,24 @@ def src(globs, **options):
 	if isinstance(globs, str):
 		globs = [ globs ]
 
-	# List of files to include and exclude
-	include = []
-	exclude = []
-
 	# Find files
-	for path in globs:
-		parse_glob(path, include, exclude)
-	apply_exclude(include, exclude)
+	files = find_files(globs)
 
 	# Create a stream
 	stream = Stream()
+
+	# Options
 	options["cwd"] = config.cwd
 
+	if "base" in options:
+		options["base"] = os.path.abspath(options["base"])
+
 	# Create a File object for each file to include
-	for file in include:
-		file = File(file, **options)
+	for infile in files:
+		file = File(infile[2], **options)
 		file.relpath = file.path
+		file.order = infile[0]
+		file.base = options.get("base", infile[1])
 		stream.append_file(file)
 
 	# No more files to add
@@ -67,3 +78,9 @@ def src(globs, **options):
 	if options.get("read", True):
 		return stream.pipe(FileReader())
 	return stream
+
+
+
+# Transformer for reading the files now (to be used with 'read=False')
+def readnow():
+	return FileReader()

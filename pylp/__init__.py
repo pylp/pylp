@@ -7,16 +7,17 @@ This file is under the MIT License.
 
 """
 
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 
 from pylp.lib.tasks import task
 from pylp.lib.tasks import start
 
 from pylp.lib.src import src
+from pylp.lib.src import readnow
 from pylp.lib.dest import dest
 
-from pylp.lib.utils import pipes
-import pylp.lib.decorators as fn
+from pylp.utils.pipes import pipes
+import pylp.utils.decorators as fn
 
 from pylp.lib.stream import Stream
 from pylp.lib.transformer import Transformer

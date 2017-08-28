@@ -13,6 +13,11 @@ from concurrent.futures import ThreadPoolExecutor
 from pylp.lib.transformer import Transformer
 
 
+# Infinity value for file order
+_inf = float('Inf')
+
+
+
 # The file class
 class File():
 
@@ -21,13 +26,14 @@ class File():
 		# Path of the file
 		self.path = os.path.abspath(path)
 		self.relpath = None
-		self.cwd = options.get('cwd')
+		self.cwd = options.get("cwd")
 		self.relative = os.path.relpath(path, self.cwd)
 
 		# Contents of the file
 		self.contents = options.get("contents", "")
 
 		# Options
+		self.order = _inf
 		self.base = options.get("base")
 
 
