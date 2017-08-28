@@ -24,6 +24,6 @@ def task(obj = None, deps = None):
 
 	# The decorator is used as a function
 	def __decorated(func):
-		__task(obj, deps, func)
+		__task(obj if obj else obj.__name__, deps, func)
 		return func
 	return __decorated
