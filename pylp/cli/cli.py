@@ -72,12 +72,14 @@ def launch_cli():
 
 	# Current working directory (CWD)
 	if args.cwd:
-		config.cwd = args.cwd
+		config.cwd = args.cwd[0]
 	else:
 		config.cwd = os.getcwd()
 
 	# Get the pylpfile location
-	pylpfile = args.pylpfile
+	if args.pylpfile:
+		pylpfile = args.pylpfile[0]
+
 	if not pylpfile:
 		pylpfile = path.join(config.cwd, "pylpfile.py")
 	elif not args.cwd:
