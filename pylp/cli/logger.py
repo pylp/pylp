@@ -36,7 +36,7 @@ def just_log(*texts, sep = ""):
 	if config.silent:
 		return
 
-	text = sep.join(texts)
+	text = _color_sep + "default" + _color_sep2 + sep.join(texts)
 	array = text.split(_color_sep)
 
 	for part in array:
@@ -58,16 +58,10 @@ def just_log(*texts, sep = ""):
 
 # Get the current time (used as prefix in all logs)
 def get_time():
-	return (default("["),
-		darkgray(time.strftime("%H:%M:%S")),
-		default("] "))
-
+	return ("[", darkgray(time.strftime("%H:%M:%S")), "] ")
 
 # Log a text
 def log(*texts, sep = ""):
 	text = sep.join(texts)
-
-	if text.startswith("\n"):
-		just_log("\n", *get_time(), text[1:])
-	else:
-		just_log(*get_time(), text)
+	count = text.count("\n")
+	just_log("\n" * count, *get_time(), text.replace("\n", ""), sep=sep)
