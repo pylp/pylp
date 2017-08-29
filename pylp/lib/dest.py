@@ -30,11 +30,7 @@ def get_path(dest, file, cwd = None):
 	if not os.path.isabs(dest):
 		dest = os.path.join(cwd, dest)
 
-	if file.base:
-		relative = os.path.relpath(file.path, file.base)
-	else:
-		relative = os.path.basename(file.path)
-
+	relative = os.path.relpath(file.path, file.base)
 	return os.path.join(dest, relative)
 
 
