@@ -23,18 +23,37 @@ class File():
 
 	# Constructor
 	def __init__(self, path, **options):
+		# Options
+		self.order = _inf
+		self.base = options.get("base", os.path.dirname(path))
+
 		# Path of the file
-		self.path = os.path.abspath(path)
-		self.relpath = None
 		self.cwd = options.get("cwd")
-		self.relative = os.path.relpath(path, self.cwd)
+		self.set_path(path)
+		self.relpath = None
 
 		# Contents of the file
 		self.contents = options.get("contents", "")
 
-		# Options
-		self.order = _inf
-		self.base = options.get("base")
+
+	# Set the path of the file
+	def set_path(self, path):
+		if os.path.isabs(path):
+			path = os.path.normpath(os.path.join(self.cwd, path))
+
+		self.path = path
+		self.relative = os.path.relpath(self.path, self.base)
+
+
+	# Clone the file
+	def clone(path = None, *, with_contents = True, **options):
+		file = File(path if path else self.path, cwd=options.get("cwd", self.cwd))
+		file.base = options.get("base", self.base)
+
+		if with_contents:
+			file.contents = options.get("contents", self.contents)
+
+		return file
 
 
 
