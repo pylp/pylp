@@ -41,26 +41,28 @@ class Stream():
 			future.add_done_callback(self.handle_transform)
 
 
+	# Call 'flush' function if all files have been transformed
+	def flush_if_ended(self):
+		if self.ended and self.next and len(self.files) == self.transformed:
+			future = asyncio.ensure_future(self.transformer.flush())
+			future.add_done_callback(lambda x: self.next.end_of_stream())
+
+
 	# Handle a 'transform' callback
 	def handle_transform(self, task):
 		self.transformed += 1
-		file = task.result()
 
+		file = task.result()
 		if file:
 			self.next.append_file(file)
 
-		if self.ended and len(self.files) == self.transformed:
-			future = asyncio.ensure_future(self.transformer.flush())
-			future.add_done_callback(lambda x: self.next.end_of_stream())
+		self.flush_if_ended()
 
 
 	# Tell that no more files will be transformed
 	def end_of_stream(self):
 		self.ended = True
-
-		if self.next and len(self.files) == self.transformed:
-			future = asyncio.ensure_future(self.transformer.flush())
-			future.add_done_callback(lambda x: self.next.end_of_stream())
+		self.flush_if_ended()
 
 
 
@@ -82,4 +84,6 @@ class Stream():
 			future.add_done_callback(self.handle_transform)	
 
 		self.onpiped.set_result(None)
+		self.flush_if_ended()
+
 		return stream
