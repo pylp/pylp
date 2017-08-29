@@ -17,16 +17,17 @@ setup(
 	author = "Guillaume Gonnet",
 	author_email = "gonnet.guillaume97@gmail.com",
 	description = "A Python task runner inspired by gulp.js",
+	long_description = open("README.rst").read(),
 	license = "MIT",
 	keywords = "pylp build task runner gulp",
 	url = "https://github.com/pylp/pylp",
 	packages = find_packages(),
-	long_description = open("README.rst").read(),
+	python_requires = ">=3.5",
 	entry_points = {
 		"console_scripts" : ["pylp = pylp.cli.cli:launch_cli",]
 	},
 	classifiers = [
-		"Development Status :: 3 - Alpha",
+		"Development Status :: 4 - Beta",
 		"Topic :: Utilities",		
 		"Topic :: Software Development :: Build Tools",
 		"Framework :: AsyncIO",
