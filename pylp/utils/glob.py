@@ -55,4 +55,4 @@ def find_base(path):
 	else:
 		base = "./"
 
-	return os.path.abspath(base)
+	return os.path.dirname(os.path.abspath(base))
