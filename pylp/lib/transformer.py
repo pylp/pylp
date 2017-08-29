@@ -24,7 +24,7 @@ class Transformer():
 
 
 	# Function called when the transformer is piped to a stream
-	def piped():
+	def piped(self):
 		pass
 
 	# Function called when a file need to be transformed
