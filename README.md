@@ -1,5 +1,9 @@
 # Pylp
 
+[![PyPI](https://img.shields.io/pypi/v/pylp.svg)](https://pypi.org/project/pylp)
+[![PyPI](https://img.shields.io/pypi/format/pylp.svg)]()
+[![PyPI](https://img.shields.io/pypi/pyversions/pylp.svg)]()
+
 ## What is pylp?
 
 Pylp is a task runner for Python3 that lets you automate tasks.  
