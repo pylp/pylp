@@ -44,7 +44,7 @@ def parse_glob(path, included):
 
 
 # Regex for finding the base
-_pattern = re.compile("[a-z0-9_.-/~]+", re.I)
+_pattern = re.compile("[a-z0-9_.\-/~]+", re.I)
 
 # Find the base of a glob
 def find_base(path):
@@ -55,4 +55,7 @@ def find_base(path):
 	else:
 		base = "./"
 
-	return os.path.dirname(os.path.abspath(base))
+	if base.endswith('/') or base.endswith('\\'):
+		return os.path.abspath(base)
+	else:
+		return os.path.dirname(os.path.abspath(base))
