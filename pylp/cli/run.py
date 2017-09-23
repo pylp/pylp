@@ -45,4 +45,5 @@ def run(path, tasks):
 # Wait until all task are executed 
 async def wait_and_quit(loop):
 	from pylp.lib.tasks import running
-	await asyncio.wait(map(lambda runner: runner.future, running))
+	if running:
+		await asyncio.wait(map(lambda runner: runner.future, running))
