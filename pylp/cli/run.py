@@ -10,17 +10,20 @@ This file is under the MIT License.
 import runpy, os, sys
 import traceback
 import asyncio
-import pylp, pylp.cli.logger as logger
+import pylp
+import pylp.cli.logger as logger
+from pylp.utils.paths import make_readable_path
 
 
 # Run a pylpfile
 def run(path, tasks):
 	# Test if the pylpfile exists
+	readable_path = make_readable_path(path)
 	if not os.path.isfile(path):
-		logger.log(logger.red("Can't read pylpfile "), logger.magenta(path))
+		logger.log(logger.red("Can't read pylpfile "), logger.magenta(readable_path))
 		sys.exit(-1)
 	else:
-		logger.log("Using pylpfile ", logger.magenta(path))
+		logger.log("Using pylpfile ", logger.magenta(readable_path))
 
 
 	# Run the pylpfile
