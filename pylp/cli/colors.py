@@ -95,4 +95,4 @@ def set_color_win32(color):
 
 # Set the color of the terminal on Linux and MacOS
 def set_color_ansi(color):
-	print("\e[" + str(color) + "m", end='')
+	print("\033[" + str(color) + "m", end='')
