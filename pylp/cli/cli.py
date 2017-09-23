@@ -15,7 +15,7 @@ relpath = path.dirname(path.realpath(__file__))
 parent = path.normpath(path.realpath(path.join(relpath, "../..")))
 
 if not parent.lower().endswith(path.normpath("lib/site-packages")):
-	sys.path.insert(0, os.path.abspath(parent))
+	sys.path.insert(0, parent)
 
 
 # We can import now all Pylp files
