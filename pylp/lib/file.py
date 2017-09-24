@@ -17,7 +17,7 @@ from pylp.lib.transformer import Transformer
 _inf = float('Inf')
 
 
-def read_file(self, path):
+def read_file(path):
 	"""Read contents from a local file."""
 	with open(path, "r") as file:
 		return file.read()
