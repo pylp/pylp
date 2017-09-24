@@ -14,9 +14,9 @@ from pylp.lib.transformer import Transformer
 
 
 
-def dest(path, **options):
-	return FileWriter(path, **options)
+def dest(path, cwd = None):
 	"""Return a transformer that writes contents to local files."""
+	return FileWriter(path, cwd)
 
 
 
@@ -45,11 +45,11 @@ def write_file(path, contents):
 class FileWriter(Transformer):
 	"""Transformer that saves contents to local files."""
 
-	def __init__(self, path, **options):
+	def __init__(self, path, cwd = None):
 		super().__init__()
 
 		self.dest = path
-		self.cwd = options.get('cwd')
+		self.cwd = cwd
 
 		self.exe = ThreadPoolExecutor()
 		self.loop = asyncio.get_event_loop()
