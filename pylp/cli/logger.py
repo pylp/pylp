@@ -18,8 +18,8 @@ _color_sep = "~~"
 _color_sep2 = ":"
 
 
-# Create a function that set the foreground color
 def _make_color_fn(color):
+	"""Create a function that set the foreground color."""
 	def _color(text = ""):
 		return (_color_sep + color + _color_sep2 + text +
 			_color_sep + "default" + _color_sep2)
@@ -31,8 +31,8 @@ for _color in colors.foreground_colors.keys():
 
 
 
-# Log a text without adding the current time
 def just_log(*texts, sep = ""):
+	"""Log a text without adding the current time."""
 	if config.silent:
 		return
 
@@ -56,12 +56,12 @@ def just_log(*texts, sep = ""):
 
 
 
-# Get the current time (used as prefix in all logs)
 def get_time():
+	"""Get the current time (used as prefix in all logs)."""
 	return ("[", darkgray(time.strftime("%H:%M:%S")), "] ")
 
-# Log a text
 def log(*texts, sep = ""):
+	"""Log a text."""
 	text = sep.join(texts)
 	count = text.count("\n")
 	just_log("\n" * count, *get_time(), text.replace("\n", ""), sep=sep)

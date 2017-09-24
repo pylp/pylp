@@ -1,6 +1,6 @@
 """
 
-Store the content of a file.
+Store the contents of a file.
 
 Copyright (C) 2017 The Pylp Authors.
 This file is under the MIT License.
@@ -18,10 +18,9 @@ _inf = float('Inf')
 
 
 
-# The file class
 class File():
+	"""This class represents a file."""
 
-	# Constructor
 	def __init__(self, path, **options):
 		# Options
 		self.order = _inf
@@ -36,8 +35,8 @@ class File():
 		self.contents = options.get("contents", "")
 
 
-	# Set the path of the file
 	def set_path(self, path):
+		"""Set the path of the file."""
 		if os.path.isabs(path):
 			path = os.path.normpath(os.path.join(self.cwd, path))
 
@@ -45,8 +44,8 @@ class File():
 		self.relative = os.path.relpath(self.path, self.base)
 
 
-	# Clone the file
 	def clone(path = None, *, with_contents = True, **options):
+		"""Clone the file."""
 		file = File(path if path else self.path, cwd=options.get("cwd", self.cwd))
 		file.base = options.get("base", self.base)
 
@@ -57,11 +56,9 @@ class File():
 
 
 
-
-# Read a local file
 class FileReader(Transformer):
+	"""Transformer that reads contents from local files."""
 
-	# Constructor
 	def __init__(self):
 		super().__init__()
 
@@ -75,7 +72,7 @@ class FileReader(Transformer):
 			return file.read()
 
 
-	# Function called when a file need to be transformed
 	async def transform(self, file):
+		"""Function called when a file need to be transformed."""
 		file.contents = await self.loop.run_in_executor(self.exe, self.read_file, file.path)
 		return file

@@ -8,8 +8,9 @@ This file is under the MIT License.
 """
 
 
-# Get a representative text of a time (in s)
 def time_to_text(time):
+    """Get a representative text of a time (in s)."""
+    
     if time < 0.001:
         return str(round(time * 1000000)) + " µs"
     elif time < 1:

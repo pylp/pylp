@@ -10,8 +10,8 @@ This file is under the MIT License.
 import os.path
 
 
-# Make a path more "readable"
 def make_readable_path(path):
+    """Make a path more "readable"""
     home = os.path.expanduser("~")
     if path.startswith(home):
         path = "~" + path[len(home):]

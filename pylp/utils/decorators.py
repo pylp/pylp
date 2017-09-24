@@ -15,8 +15,9 @@ from pylp.lib.tasks import task as __task
 sys.modules['pylp.fn'] = sys.modules[__name__]
 
 
-# Create a task
 def task(obj = None, deps = None):
+	"""Decorator for creating a task."""
+
 	# The decorator is not used as a function
 	if callable(obj):
 		__task(obj.__name__, obj)

@@ -14,14 +14,14 @@ from pylp.lib.transformer import Transformer
 
 
 
-# Return a transformer for writing files
 def dest(path, **options):
 	return FileWriter(path, **options)
+	"""Return a transformer that writes contents to local files."""
 
 
 
-# Get the writing path of a file
 def get_path(dest, file, cwd = None):
+	"""Get the writing path of a file."""
 	if callable(dest):
 		return dest(file)
 
@@ -34,18 +34,17 @@ def get_path(dest, file, cwd = None):
 	return os.path.join(dest, relative)
 
 
-# Write a file
 def write_file(path, contents):
+	"""Write contents to a local file."""
 	os.makedirs(os.path.dirname(path), exist_ok=True)
 	with open(path, "w") as file:
 		file.write(contents)
 
 
 
-# Transformer that save local files.
 class FileWriter(Transformer):
+	"""Transformer that saves contents to local files."""
 
-	# Constructor
 	def __init__(self, path, **options):
 		super().__init__()
 
@@ -56,8 +55,8 @@ class FileWriter(Transformer):
 		self.loop = asyncio.get_event_loop()
 
 
-	# Function called when a file need to be transformed
 	async def transform(self, file):
+		"""Function called when a file need to be transformed."""
 		path = get_path(self.dest, file)
 		await self.loop.run_in_executor(self.exe, write_file, path, file.contents)
 		return file

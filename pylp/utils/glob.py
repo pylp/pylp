@@ -12,8 +12,8 @@ import glob
 import re
 
 
-# Separate include and exclude globs
 def separate_globs(globs):
+	"""Separate include and exclude globs."""
 	exclude = []
 	include = []
 
@@ -27,8 +27,8 @@ def separate_globs(globs):
 
 
 
-# Parse a glob
 def parse_glob(path, included):
+	"""Parse a glob."""
 	files = glob.glob(path, recursive=True)
 
 	array = []
@@ -46,8 +46,8 @@ def parse_glob(path, included):
 # Regex for finding the base
 _pattern = re.compile("[a-z0-9_.\-/~]+", re.I)
 
-# Find the base of a glob
 def find_base(path):
+	"""Find the base of a glob."""
 	result = _pattern.match(path)
 
 	if result:

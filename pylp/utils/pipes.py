@@ -8,8 +8,8 @@ This file is under the MIT License.
 """
 
 
-# Pipe several transformers end to end
 def pipes(stream, *transformers):
+    """Pipe several transformers end to end."""
     for transformer in transformers:
         stream = stream.pipe(transformer)
     return stream

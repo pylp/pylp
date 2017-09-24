@@ -1,6 +1,6 @@
 """
 
-Create a starting stream from local files.
+Create a stream from local files.
 
 Copyright (C) 2017 The Pylp Authors.
 This file is under the MIT License.
@@ -14,8 +14,9 @@ from pylp.lib.file import File, FileReader
 from pylp.lib.stream import Stream
 
 
-# Find files to include
 def find_files(globs):
+	"""Find files to include."""
+
 	last_cwd = os.getcwd()
 	os.chdir(config.cwd)
 
@@ -45,8 +46,9 @@ def find_files(globs):
 
 
 
-# Read some files and return a stream
 def src(globs, **options):
+	"""Read some files and return a stream."""
+
 	# Create an array of globs if only one string is given
 	if isinstance(globs, str):
 		globs = [ globs ]
@@ -81,6 +83,6 @@ def src(globs, **options):
 
 
 
-# Transformer for reading the files now (to be used with 'read=False')
 def readnow():
+	"""Return a transformer that reads the files now (to be used with 'read=False')."""
 	return FileReader()

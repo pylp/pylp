@@ -17,25 +17,23 @@ from pylp.utils.time import time_to_text
 
 
 
-# Wait until a 'end-of-stream'
 class TaskEndTransformer(Transformer):
+	"""Transformer that waits until a 'end-of-stream'."""
 
-	# Constructor
 	def __init__(self, future):
 		super().__init__()
 		self.future = future
 
-	# Function called after when files are transformed.
 	async def flush(self):
+		"""Function called after when files are transformed."""
 		self.future.set_result(None)
 
 
 
 
-# Execute a task
 class TaskRunner():
+	"""This class executes a task."""
 
-	# Constructor
 	def __init__(self, name, fn, deps, called):
 		self.name = name
 		self.called = called if called else []
@@ -49,23 +47,21 @@ class TaskRunner():
 			self.future = self.call_task_fn()
 
 
-
-	# Log that the task has started
 	def log_starting(self):
+		"""Log that the task has started."""
 		self.start_time = time.perf_counter()
 		logger.log("Starting '", logger.cyan(self.name), "'...")
 
 
-	# Log that this task is done
 	def log_finished(self):
+		"""Log that this task is done."""
 		delta = time.perf_counter() - self.start_time
 		logger.log("Finished '", logger.cyan(self.name),
 			"' after ", logger.magenta(time_to_text(delta)))
 
 
-
-	# Call the function attached to the task
 	def call_task_fn(self):
+		"""Call the function attached to the task."""
 		if not self.fn:
 			return self.log_finished()
 
@@ -81,17 +77,17 @@ class TaskRunner():
 		return future
 
 
-	# Dind a 'TaskEndTransformer' to a stream
 	def bind_end(self, stream, future):
+		"""Bind a 'TaskEndTransformer' to a stream."""
 		if not isinstance(stream, Stream):
 			future.set_result(None)
 		else:
 			stream.pipe(TaskEndTransformer(future))
 
 
-
-	# Start running dependencies
 	async def start_deps(self, deps):
+		"""Start running dependencies."""
+
 		# Get only new dependencies
 		deps = list(filter(lambda dep: dep not in self.called, deps))
 		self.called += deps

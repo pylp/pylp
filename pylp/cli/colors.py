@@ -66,10 +66,11 @@ background_colors = {
 
 
 
-# Set the foreground color
 def foreground(color):
+	"""Set the foreground color."""
 	if color not in foreground_colors:
 		return
+
 	if is_win32:
 		last_fg = foreground_colors[color][1]
 		set_color_win32(last_fg | last_bg)
@@ -77,10 +78,11 @@ def foreground(color):
 		set_color_ansi(foreground_colors[color][0])
 
 
-# Set the background color
 def background(color):
+	"""Set the background color."""
 	if color not in background_colors:
 		return
+
 	if is_win32:
 		last_bg = background_colors[color][1]
 		set_color_win32(last_fg | last_bg)
@@ -89,10 +91,10 @@ def background(color):
 
 
 
-# Set the color of the terminal on Windows
 def set_color_win32(color):
+	"""Set the color of the terminal on Windows."""
 	ctypes.windll.kernel32.SetConsoleTextAttribute(handle, color)
 
-# Set the color of the terminal on Linux and MacOS
 def set_color_ansi(color):
+	"""Set the color of the terminal on Linux and MacOS."""
 	print("\033[" + str(color) + "m", end='')

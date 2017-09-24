@@ -15,8 +15,8 @@ from pylp.lib.runner import TaskRunner
 # List of created tasks
 tasks = {}
 
-# Define a new task.
 def task(name, deps = None, fn = None):
+	"""Define a new task."""
 	if callable(deps):
 		fn = deps
 		deps = None
@@ -31,8 +31,8 @@ def task(name, deps = None, fn = None):
 # List of running task
 running = []
 
-# Start a task
 def start(name, called = None):
+	"""Start a task."""
 	if name not in tasks:
 		logger.log(logger.red("Task '%s' not in your pylpfile" % name))
 	else:

@@ -26,8 +26,9 @@ from pylp.cli.run import run
 
 
 
-# Launch the CLI
 def launch_cli():
+	"""Launch the CLI."""
+
 	# Create the CLI argument parser
 	parser = argparse.ArgumentParser(
 		prog="pylp",

@@ -15,8 +15,9 @@ import pylp.cli.logger as logger
 from pylp.utils.paths import make_readable_path
 
 
-# Run a pylpfile
 def run(path, tasks):
+	"""Run a pylpfile."""
+
 	# Test if the pylpfile exists
 	readable_path = make_readable_path(path)
 	if not os.path.isfile(path):
@@ -45,8 +46,8 @@ def run(path, tasks):
 
 
 
-# Wait until all task are executed 
 async def wait_and_quit(loop):
+	"""Wait until all task are executed."""
 	from pylp.lib.tasks import running
 	if running:
 		await asyncio.wait(map(lambda runner: runner.future, running))
