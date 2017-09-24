@@ -17,6 +17,12 @@ from pylp.lib.transformer import Transformer
 _inf = float('Inf')
 
 
+def read_file(self, path):
+	"""Read contents from a local file."""
+	with open(path, "r") as file:
+		return file.read()
+
+
 
 class File():
 	"""This class represents a file."""
@@ -66,13 +72,7 @@ class FileReader(Transformer):
 		self.loop = asyncio.get_event_loop()
 
 
-	# Read a file
-	def read_file(self, path):
-		with open(path, "r") as file:
-			return file.read()
-
-
 	async def transform(self, file):
 		"""Function called when a file need to be transformed."""
-		file.contents = await self.loop.run_in_executor(self.exe, self.read_file, file.path)
+		file.contents = await self.loop.run_in_executor(self.exe, read_file, file.path)
 		return file
