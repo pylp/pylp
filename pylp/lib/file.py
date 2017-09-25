@@ -50,7 +50,7 @@ class File():
 		self.relative = os.path.relpath(self.path, self.base)
 
 
-	def clone(path = None, *, with_contents = True, **options):
+	def clone(self, path = None, *, with_contents = True, **options):
 		"""Clone the file."""
 		file = File(path if path else self.path, cwd=options.get("cwd", self.cwd))
 		file.base = options.get("base", self.base)
