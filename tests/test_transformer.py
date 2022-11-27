@@ -7,8 +7,9 @@ This file is under the MIT License.
 
 """
 
+import pytest
 import pylp
-from utils import AsyncTestCase
+from tests.utils import AsyncTestCase
 
 
 class UpperTransformer(pylp.Transformer):
@@ -29,6 +30,7 @@ class ReverseTransformer(pylp.Transformer):
 		return file
 
 
+
 class RecorderTransformer(pylp.Transformer):
 	"""A transformer that record files passed inside."""
 
@@ -41,29 +43,29 @@ class RecorderTransformer(pylp.Transformer):
 		return file
 
 
-
-class TestTransformer(AsyncTestCase):
+@pytest.mark.asyncio
+class TestTransformer:
 	"""Test transformers contained in streams."""
 
-	async def test_transfomer_upper(self):
+	async def test_transformer_upper(self):
 		"""It should capitalize contents."""
 
-		stream = pylp.src("./fixtures/file.txt").pipe(UpperTransformer())
+		stream = pylp.src("./tests/fixtures/file.txt").pipe(UpperTransformer())
 		await stream.wait_processed()
 
-		self.assertEqual(len(stream.files), 1)
+		assert len(stream.files) == 1
 		file = stream.files[0]
 
-		self.assertIsInstance(file, pylp.File)
-		self.assertEqual(file.contents, "THIS IS A TEST FILE.")
+		assert  isinstance(file, pylp.File)
+		assert file.contents == "THIS IS A TEST FILE."
 
-	
-	async def test_transfomer_multiple(self):
+
+	async def test_transformer_multiple(self):
 		"""It should run multiple transformers."""
 
 		recorder = RecorderTransformer()
 		stream = pylp.pipes(
-			pylp.src("./fixtures/file.txt"),
+			pylp.src("./tests/fixtures/file.txt"),
 			UpperTransformer(),
 			recorder,
 			ReverseTransformer()
@@ -71,8 +73,8 @@ class TestTransformer(AsyncTestCase):
 
 		await stream.wait_processed()
 
-		self.assertEqual(len(stream.files), 1)
-		self.assertEqual(len(recorder.files), 1)
+		assert len(stream.files) == 1
+		assert len(recorder.files) == 1
 
-		self.assertEqual(recorder.files[0].contents, "THIS IS A TEST FILE.")
-		self.assertEqual(stream.files[0].contents, ".ELIF TSET A SI SIHT")
+		assert recorder.files[0].contents == "THIS IS A TEST FILE."
+		assert stream.files[0].contents == ".ELIF TSET A SI SIHT"

@@ -8,14 +8,13 @@ This file is under the MIT License.
 """
 
 import pylp
-from utils import AsyncTestCase
 
 
-class TestTask(AsyncTestCase):
+class TestTask:
 	"""Test 'pylp.task' for defining a new task."""
 
 	def test_task_simple(self):
 		"""It should define a task"""
 
 		pylp.task('test', lambda: None)
-		self.assertIn('test', pylp.lib.tasks.tasks)
+		assert 'test' in pylp.lib.tasks.tasks

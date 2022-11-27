@@ -26,8 +26,6 @@ def wait_processed(self):
 # Set this function as a method of Stream
 Stream.wait_processed = wait_processed
 
-
-
 def async_test(func):
 	"""Run an asynchrounous test."""
 
@@ -42,7 +40,6 @@ def async_test(func):
 
 	test_func.__doc__ = func.__doc__
 	return test_func
-
 
 
 class AsyncTestCase(unittest.TestCase):
