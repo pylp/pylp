@@ -6,10 +6,10 @@
 
 ## What is pylp?
 
-Pylp is a task runner for Python3 that lets you automate tasks.  
+Pylp is a task runner for Python3 that lets you automate tasks.
 It's inspired by [gulp.js](https://gulpjs.com).
 
-Pylp use a syntax similar to Gulp, making this task runner easy to learn and simple to use.  
+Pylp use a syntax similar to Gulp, making this task runner easy to learn and simple to use.
 Task process is completely asynchronous thanks to `asyncio` module, which provides a fast execution.
 
 
@@ -37,3 +37,8 @@ pylp.task('js', lambda:
 # The default task (called when you run 'pylp' from cli)
 pylp.task('default', ['js'])
 ```
+
+## Running Tests
+
+  cd tests
+  python runtests.py
