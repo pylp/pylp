@@ -19,7 +19,7 @@ class TestDestTransformer:
     """Test 'pylp.dest' for writing contents to local files."""
 
     def setup_method(self, test_method):
-        self.out_folder = "tests/out-fixtures/"
+        self.out_folder = "tests/unit/out-fixtures/"
 
         shutil.rmtree(self.out_folder, ignore_errors=True)
         os.mkdir(self.out_folder)
@@ -30,14 +30,14 @@ class TestDestTransformer:
     async def test_dest_simple(self):
         """It should return a writing transformer"""
 
-        transformer = pylp.dest("tests/fixtures/")
+        transformer = pylp.dest("tests/unit/fixtures/")
         assert isinstance(transformer, FileWriter)
 
 
     async def test_dest_copy(self):
         """It should copy a file into the destination folder"""
 
-        stream = pylp.src("tests/fixtures/*.txt").pipe(pylp.dest(self.out_folder))
+        stream = pylp.src("tests/unit/fixtures/*.txt").pipe(pylp.dest(self.out_folder))
         await stream.wait_processed()
 
         filename = path.join(self.out_folder, "file.txt")
@@ -51,7 +51,7 @@ class TestDestTransformer:
     async def test_dest_copy_base(self):
         """It should copy a file into the destination folder, keeping the base folder"""
 
-        stream = pylp.src("tests/fixtures/**/*.ext2").pipe(pylp.dest(self.out_folder))
+        stream = pylp.src("tests/unit/fixtures/**/*.ext2").pipe(pylp.dest(self.out_folder))
         await stream.wait_processed()
 
         filename = path.join(self.out_folder, "other-files/a-file.ext2")

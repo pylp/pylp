@@ -50,7 +50,7 @@ class TestTransformer:
 	async def test_transformer_upper(self):
 		"""It should capitalize contents."""
 
-		stream = pylp.src("./tests/fixtures/file.txt").pipe(UpperTransformer())
+		stream = pylp.src("./tests/unit/fixtures/file.txt").pipe(UpperTransformer())
 		await stream.wait_processed()
 
 		assert len(stream.files) == 1
@@ -65,7 +65,7 @@ class TestTransformer:
 
 		recorder = RecorderTransformer()
 		stream = pylp.pipes(
-			pylp.src("./tests/fixtures/file.txt"),
+			pylp.src("./tests/unit/fixtures/file.txt"),
 			UpperTransformer(),
 			recorder,
 			ReverseTransformer()
