@@ -12,6 +12,7 @@ from os.path import abspath
 import pylp
 from tests.utils import AsyncTestCase
 
+# https://github.com/gulpjs/gulp/blob/master/test/src.js
 
 @pytest.mark.asyncio
 class TestInputStream:

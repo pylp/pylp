@@ -14,6 +14,8 @@ import pylp
 
 from pylp.lib.dest import FileWriter
 
+# https://github.com/gulpjs/gulp/blob/master/test/dest.js
+
 @pytest.mark.asyncio
 class TestDestTransformer:
     """Test 'pylp.dest' for writing contents to local files."""

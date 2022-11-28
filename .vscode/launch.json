@@ -5,7 +5,21 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "1. PyTest",
+      "name": "1. pylp",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/pylp.py",
+      "args": [
+        // "--help",
+        "--pylpfile=./tests/pylpfile.py",
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      // "justMyCode" : false
+    },
+
+    {
+      "name": "2a. PyTest",
       "type": "python",
       "request": "launch",
       "stopOnEntry": false,
@@ -17,5 +31,25 @@
       "console": "internalConsole",
       "justMyCode": false
     },
+
+    {
+      "name": "2b. PyTest (Current file)",
+      "type": "python",
+      "request": "launch",
+      "stopOnEntry": false,
+      "module": "pytest",
+      "args": [
+        "--headless",
+        "-sv",
+        "${file}"
+      ],
+      "cwd": "${workspaceRoot}",
+      "env": {},
+      "envFile": "${workspaceRoot}/.env",
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "justMyCode": false
+    },
+
   ]
 }
