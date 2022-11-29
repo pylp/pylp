@@ -1,5 +1,6 @@
 # Pylp
 
+[![Build Status][build_status_badge]][build_status_link]
 [![PyPI](https://img.shields.io/pypi/v/pylp.svg)](https://pypi.org/project/pylp)
 [![PyPI](https://img.shields.io/pypi/format/pylp.svg)]()
 [![PyPI](https://img.shields.io/pypi/pyversions/pylp.svg)]()
