@@ -9,7 +9,6 @@ This file is under the MIT License.
 
 import pytest
 import pylp
-from tests.utils import AsyncTestCase
 
 
 class UpperTransformer(pylp.Transformer):

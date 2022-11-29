@@ -10,7 +10,6 @@ This file is under the MIT License.
 import pytest
 from os.path import abspath
 import pylp
-from tests.utils import AsyncTestCase
 
 # https://github.com/gulpjs/gulp/blob/master/test/src.js
 
