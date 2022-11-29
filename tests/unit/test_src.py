@@ -8,7 +8,7 @@ This file is under the MIT License.
 """
 
 import pytest
-from os.path import abspath
+from os.path import abspath, relpath
 import pylp
 
 # https://github.com/gulpjs/gulp/blob/master/test/src.js
@@ -116,17 +116,17 @@ class TestInputStream:
     async def test_src_same_file(self):
         """It should return a stream, with no duplicates"""
 
-        files = [
-            ("./tests/unit/fixtures/file.txt", "This is a test file."),
-            ("./tests/unit/fixtures/some-files/file3.txt", "This is another test file.")
-        ]
+        files = {
+            abspath("./tests/unit/fixtures/file.txt"): "This is a test file.",
+            abspath("./tests/unit/fixtures/some-files/file3.txt"): "This is another test file."
+        }
 
         stream = pylp.src(["./tests/unit/fixtures/**/*.txt", "./tests/unit/fixtures/*.txt"])
         await stream.wait_processed()
 
         assert len(stream.files) == len(files)
 
-        for (path, contents), file in zip(files, stream.files):
+        for file in stream.files:
             assert isinstance(file, pylp.File)
-            assert file.path == abspath(path)
-            assert file.contents == contents
+            assert file.path in files
+            assert files[file.path] == file.contents
