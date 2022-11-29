@@ -39,9 +39,27 @@
       "stopOnEntry": false,
       "module": "pytest",
       "args": [
-        "--headless",
         "-sv",
         "${file}"
+      ],
+      "cwd": "${workspaceRoot}",
+      "env": {},
+      "envFile": "${workspaceRoot}/.env",
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "justMyCode": false
+    },
+
+    {
+      "name": "2c. PyTest (tests/integration/test_simple.py  tests/unit/test_transformer.py)",
+      "type": "python",
+      "request": "launch",
+      "stopOnEntry": false,
+      "module": "pytest",
+      "args": [
+        "-sv",
+        "tests/integration/test_simple.py",
+        "tests/unit/test_transformer.py"
       ],
       "cwd": "${workspaceRoot}",
       "env": {},

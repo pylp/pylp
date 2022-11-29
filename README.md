@@ -40,5 +40,6 @@ pylp.task('default', ['js'])
 
 ## Running Tests
 
-  cd tests
-  python runtests.py
+  python pylp.py --pylpfile tests/integration/pylpfile.py
+
+  pytest
