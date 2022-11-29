@@ -48,3 +48,7 @@ pylp.task('default', ['js'])
   pytest tests/integration
 
   pytest
+
+
+[build_status_badge]: https://github.com/stevej2608/pylp/actions/workflows/test.yml/badge.svg
+[build_status_link]: https://github.com/stevej2608/pylp/actions/workflows/test.yml
