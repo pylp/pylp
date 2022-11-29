@@ -42,4 +42,8 @@ pylp.task('default', ['js'])
 
   python pylp.py --pylpfile tests/integration/pylpfile.py
 
+  pytest tests/unit
+
+  pytest tests/integration
+
   pytest

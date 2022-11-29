@@ -51,15 +51,14 @@
     },
 
     {
-      "name": "2c. PyTest (tests/integration/test_simple.py  tests/unit/test_transformer.py)",
+      "name": "2c. PyTest (tests/integration)",
       "type": "python",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",
       "args": [
         "-sv",
-        "tests/integration/test_simple.py",
-        "tests/unit/test_transformer.py"
+        "tests/integration"
       ],
       "cwd": "${workspaceRoot}",
       "env": {},

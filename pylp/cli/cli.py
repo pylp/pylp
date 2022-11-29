@@ -20,7 +20,7 @@ from pylp.cli.run import run
 @click.version_option(version, prog_name='pylp')
 @click.option('--pylpfile',  help="manually set path of pylpfile")
 @click.option('--silent', is_flag=True,  help="disable all Pylp logging")
-@click.option('--no-color', is_flag=False,  help="force Pylp to not display colors")
+@click.option('--no-color', is_flag=True,  help="force Pylp to not display colors")
 @click.option('--cwd',  help="manually set the CWD")
 @click.argument('tasks', nargs=-1)
 def launch_cli(pylpfile, silent, no_color, cwd, tasks):
@@ -48,7 +48,7 @@ def launch_cli(pylpfile, silent, no_color, cwd, tasks):
 
 
     # Must the terminal have colors?
-    config.color = no_color
+    config.color = not no_color
 
     # Must Pylp be silent (no logging)?
     config.silent = silent
