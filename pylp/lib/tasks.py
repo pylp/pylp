@@ -7,36 +7,42 @@ License GPL3
 
 """
 
-import pylp.cli.logger as logger
+from typing import List
+from collections import namedtuple
+from pylp.cli import logger
 from pylp.lib.runner import TaskRunner
 
 
+# List of tasks defined in pylpfile.py
 
-# List of created tasks
-tasks = {}
+task_registry = {}
 
 def task(name, deps = None, fn = None):
-	"""Define a new task."""
-	if callable(deps):
-		fn = deps
-		deps = None
+    """Define a new task."""
 
-	if not deps and not fn:
-		logger.log(logger.red("The task '%s' is empty" % name))
-	else:
-		tasks[name] = [fn, deps]
+    logger.log("Register task ", name)
+
+    if callable(deps):
+        fn = deps
+        deps = None
+
+    if not deps and not fn:
+        logger.log(logger.red("The task '%s' is empty" % name))
+    else:
+        Task = namedtuple("Task", "fn deps")
+        task_registry[name] = Task(fn, deps)
 
 
 
 # List of running task
-running = []
+running: List[TaskRunner] = []
 
 def start(name, called = None):
-	"""Start a task."""
-	if name not in tasks:
-		logger.log(logger.red("Task '%s' not in your pylpfile" % name))
-	else:
-		task = tasks[name]
-		runner = TaskRunner(name, task[0], task[1], called)
-		running.append(runner)
-		return runner
+    """Start a task."""
+    if name not in task_registry:
+        logger.log(logger.red("Task '%s' not in your pylpfile" % name))
+    else:
+        task = task_registry[name]
+        runner = TaskRunner(name, task.fn, task.deps, called)
+        running.append(runner)
+        return runner

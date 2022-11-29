@@ -7,7 +7,7 @@ This file is under the MIT License.
 
 """
 
-__version__ = "0.2.10"
+__version__ = "0.2.11"
 
 from pylp.lib.tasks import task
 from pylp.lib.tasks import start
@@ -22,3 +22,5 @@ import pylp.utils.decorators as fn
 from pylp.lib.stream import Stream
 from pylp.lib.transformer import Transformer
 from pylp.lib.file import File
+
+from pylp.cli.cli import launch_cli

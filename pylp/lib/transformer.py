@@ -7,29 +7,25 @@ This file is under the MIT License.
 
 """
 
-import asyncio
-
-
 class Transformer():
-	"""This class transform contents."""
+    """This class transform contents."""
 
-	def __init__(self):
-		self.stream = None
-
-
-	def append(self, file):
-		"""Append a new file in the stream."""
-		self.stream.next.append_file(file)
+    def __init__(self):
+        self.stream = None
 
 
-	def piped(self):
-		"""Function called when the transformer is piped to a stream."""
-		pass
+    def append(self, file):
+        """Append a new file in the stream."""
+        self.stream.next.append_file(file)
 
-	async def transform(self, file):
-		"""Function called when a file need to be transformed."""
-		pass
 
-	async def flush(self):
-		"""Function called when all files have been transformed."""
-		pass
+    def piped(self):
+        """Function called when the transformer is piped to a stream."""
+
+
+    async def transform(self, file):
+        """Function called when a file need to be transformed."""
+
+
+    async def flush(self):
+        """Function called when all files have been transformed."""
