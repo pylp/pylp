@@ -11,7 +11,6 @@ This file is under the MIT License.
 import asyncio
 
 from pylp.lib.runner import TaskEndTransformer
-from pylp import Stream
 
 
 # Create a function to wait for the end of the stream

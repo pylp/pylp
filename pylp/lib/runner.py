@@ -8,13 +8,14 @@ License GPL3
 """
 
 import asyncio
-import inspect, time
+import inspect
+import time
+
 import pylp
 import pylp.cli.logger as logger
 from pylp.lib.stream import Stream
 from pylp.lib.transformer import Transformer
 from pylp.utils.time import time_to_text
-
 
 
 class TaskEndTransformer(Transformer):

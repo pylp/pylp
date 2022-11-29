@@ -1,1 +1,1 @@
-from .cli import launch_cli
+from  pylp.cli.cli import launch_cli

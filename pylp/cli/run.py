@@ -7,12 +7,15 @@ This file is under the MIT License.
 
 """
 
-from typing import List
-import runpy, os, sys
-import traceback
 import asyncio
+import os
+import runpy
+import sys
+import traceback
+from typing import List
+
 import pylp
-import pylp.cli.logger as logger
+from pylp.cli import logger
 from pylp.utils.paths import make_readable_path
 
 
@@ -54,7 +57,10 @@ def run(path:str, tasks:List[str]):
 
 async def wait_and_quit(loop):
     """Wait until all task are executed."""
+
+    # pylint: disable=import-outside-toplevel
     from pylp.lib.tasks import running
+
     if running:
         futures = list(map(lambda task_runner: task_runner.future, running))
         # await asyncio.wait(map(lambda task_runner: task_runner.future, running))

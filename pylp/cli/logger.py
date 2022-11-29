@@ -8,8 +8,8 @@ This file is under the MIT License.
 """
 
 import time
-import pylp.cli.colors as colors
-import pylp.lib.config as config
+from pylp.cli import colors
+from pylp.lib import config
 
 
 # Color separators
@@ -58,6 +58,7 @@ def just_log(*texts, sep = ""):
 
 def get_time():
     """Get the current time (used as prefix in all logs)."""
+    # pylint: disable=undefined-variable
     return ("[", darkgray(time.strftime("%H:%M:%S")), "] ")
 
 def log(*texts, sep = ""):

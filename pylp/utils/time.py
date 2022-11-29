@@ -10,12 +10,12 @@ This file is under the MIT License.
 
 def time_to_text(time):
     """Get a representative text of a time (in s)."""
-    
+
     if time < 0.001:
         return str(round(time * 1000000)) + " µs"
-    elif time < 1:
+    if time < 1:
         return str(round(time * 1000)) + " ms"
-    elif time < 60:
+    if time < 60:
         return str(round(time, 1)) + " s"
-    else:
-        return str(round(time / 60, 1)) + " min"
+
+    return str(round(time / 60, 1)) + " min"

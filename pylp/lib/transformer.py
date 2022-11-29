@@ -7,9 +7,6 @@ This file is under the MIT License.
 
 """
 
-import asyncio
-
-
 class Transformer():
     """This class transform contents."""
 
@@ -24,12 +21,11 @@ class Transformer():
 
     def piped(self):
         """Function called when the transformer is piped to a stream."""
-        pass
+
 
     async def transform(self, file):
         """Function called when a file need to be transformed."""
-        pass
+
 
     async def flush(self):
         """Function called when all files have been transformed."""
-        pass

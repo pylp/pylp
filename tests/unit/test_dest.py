@@ -7,13 +7,14 @@ This file is under the MIT License.
 
 """
 
-import os, os.path as path
-import pytest
+import os
 import shutil
+from os import path
+
+import pytest
+
 import pylp
-
 from pylp.lib.dest import FileWriter
-
 
 # https://github.com/gulpjs/gulp/blob/master/test/dest.js
 

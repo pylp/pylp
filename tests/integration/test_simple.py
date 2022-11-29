@@ -10,7 +10,7 @@ def line_count(filename):
 
 def test_cli_version(cli_runner):
     result = cli_runner.invoke(launch_cli, args=["--version"])
-    assert result.output == 'pylp, version 0.2.10\n'
+    assert result.output == 'pylp, version 0.2.11\n'
 
 def test_cli(cli_runner):
     OUT_FILE = './tests/integration/.build/all.py'

@@ -1,5 +1,4 @@
 import os
-import pylp
 import pytest
 
 from pylp import Stream

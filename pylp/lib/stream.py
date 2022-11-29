@@ -66,7 +66,7 @@ class Stream():
     def pipe(self, transformer):
         """Pipe this stream to another."""
         if self.next:
-            return
+            return None
 
         stream = Stream()
         self.next = stream

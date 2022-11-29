@@ -8,10 +8,11 @@ This file is under the MIT License.
 """
 
 import os
-import pylp.lib.config as config
-from pylp.utils.glob import separate_globs, parse_glob, find_base
+
+from pylp.lib import config
 from pylp.lib.file import File, FileReader
 from pylp.lib.stream import Stream
+from pylp.utils.glob import find_base, parse_glob, separate_globs
 
 
 def find_files(globs):

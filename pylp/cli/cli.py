@@ -9,11 +9,11 @@ This file is under the MIT License.
 
 # Add parent folder into 'sys.path' if Pylp is not in Python 'Lib' folder.
 import click
-import os, sys
-import os.path as path
+import os
+from os import path
 
 from pylp import __version__ as version
-import pylp.lib.config as config
+from pylp.lib import config
 from pylp.cli.run import run
 
 @click.command()

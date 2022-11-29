@@ -33,6 +33,7 @@ class RecorderTransformer(pylp.Transformer):
     """A transformer that record files passed inside."""
 
     def __init__(self):
+        super().__init__()
         self.files = []
 
     async def transform(self, file):

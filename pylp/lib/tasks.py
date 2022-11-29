@@ -9,7 +9,7 @@ License GPL3
 
 from typing import List
 from collections import namedtuple
-import pylp.cli.logger as logger
+from pylp.cli import logger
 from pylp.lib.runner import TaskRunner
 
 
