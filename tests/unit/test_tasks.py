@@ -11,10 +11,10 @@ import pylp
 
 
 class TestTask:
-	"""Test 'pylp.task' for defining a new task."""
+    """Test 'pylp.task' for defining a new task."""
 
-	def test_task_simple(self):
-		"""It should define a task"""
+    def test_task_simple(self):
+        """It should define a task"""
 
-		pylp.task('test', lambda: None)
-		assert 'test' in pylp.lib.tasks.task_registry
+        pylp.task('test', lambda: None)
+        assert 'test' in pylp.lib.tasks.task_registry

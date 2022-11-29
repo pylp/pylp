@@ -13,33 +13,33 @@ import re
 
 
 def separate_globs(globs):
-	"""Separate include and exclude globs."""
-	exclude = []
-	include = []
+    """Separate include and exclude globs."""
+    exclude = []
+    include = []
 
-	for path in globs:
-		if path.startswith("!"):
-			exclude.append(path[1:])
-		else:
-			include.append(path)
+    for path in globs:
+        if path.startswith("!"):
+            exclude.append(path[1:])
+        else:
+            include.append(path)
 
-	return (exclude, include)
+    return (exclude, include)
 
 
 
 def parse_glob(path, included):
-	"""Parse a glob."""
-	files = glob.glob(path, recursive=True)
+    """Parse a glob."""
+    files = glob.glob(path, recursive=True)
 
-	array = []
+    array = []
 
-	for file in files:
-		file = os.path.abspath(file)
-		if file not in included:
-			array.append(file)
+    for file in files:
+        file = os.path.abspath(file)
+        if file not in included:
+            array.append(file)
 
-	included += array
-	return array
+    included += array
+    return array
 
 
 
@@ -47,15 +47,15 @@ def parse_glob(path, included):
 _pattern = re.compile("[a-z0-9_.\-/~]+", re.I)
 
 def find_base(path):
-	"""Find the base of a glob."""
-	result = _pattern.match(path)
+    """Find the base of a glob."""
+    result = _pattern.match(path)
 
-	if result:
-		base = result.group(0)
-	else:
-		base = "./"
+    if result:
+        base = result.group(0)
+    else:
+        base = "./"
 
-	if base.endswith('/') or base.endswith('\\'):
-		return os.path.abspath(base)
-	else:
-		return os.path.dirname(os.path.abspath(base))
+    if base.endswith('/') or base.endswith('\\'):
+        return os.path.abspath(base)
+    else:
+        return os.path.dirname(os.path.abspath(base))

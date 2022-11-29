@@ -16,7 +16,7 @@ from pylp import Stream
 
 # Create a function to wait for the end of the stream
 def wait_processed(self):
-	"""Wait until the stream have processed the files."""
-	future = asyncio.Future()
-	self.pipe(TaskEndTransformer(future))
-	return future
+    """Wait until the stream have processed the files."""
+    future = asyncio.Future()
+    self.pipe(TaskEndTransformer(future))
+    return future
