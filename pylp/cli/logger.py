@@ -58,8 +58,9 @@ def just_log(*texts, sep = ""):
 
 def get_time():
     """Get the current time (used as prefix in all logs)."""
+
     # pylint: disable=undefined-variable
-    return ("[", darkgray(time.strftime("%H:%M:%S")), "] ")
+    return ("[", darkgray(time.strftime("%H:%M:%S")), "] ")  # noqa: F821
 
 def log(*texts, sep = ""):
     """Log a text."""
