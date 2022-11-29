@@ -46,7 +46,7 @@ def find_files(globs):
 
 
 
-def src(globs, **options):
+def src(globs, **options) -> Stream:
 	"""Read some files and return a stream."""
 
 	# Create an array of globs if only one string is given

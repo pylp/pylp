@@ -17,4 +17,4 @@ class TestTask:
 		"""It should define a task"""
 
 		pylp.task('test', lambda: None)
-		assert 'test' in pylp.lib.tasks.tasks
+		assert 'test' in pylp.lib.tasks.task_registry

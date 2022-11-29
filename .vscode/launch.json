@@ -15,11 +15,11 @@
       ],
       "cwd": "${workspaceFolder}",
       "console": "internalConsole",
-      // "justMyCode" : false
+      "justMyCode" : false
     },
 
     {
-      "name": "2a. PyTest",
+      "name": "2a. PyTest (All)",
       "type": "python",
       "request": "launch",
       "stopOnEntry": false,

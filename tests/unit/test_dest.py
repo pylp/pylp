@@ -13,6 +13,7 @@ import shutil
 import pylp
 
 from pylp.lib.dest import FileWriter
+from tests.utils import AsyncTestCase
 
 # https://github.com/gulpjs/gulp/blob/master/test/dest.js
 
